@@ -40,6 +40,7 @@ import { getProviderConfig } from '../../../shared/modules/selectors/networks';
 import { toggleNetworkMenu } from '../../store/actions';
 import { getSnapName } from '../../helpers/utils/util';
 import { decodeSnapIdFromPathname } from '../../helpers/utils/snaps';
+import { getManifestFlags } from '../../../app/scripts/lib/manifestFlags';
 import Settings from './settings.component';
 
 const ROUTES_TO_I18N_KEYS = {
@@ -67,6 +68,8 @@ const mapStateToProps = (state, ownProps) => {
     metamask: { currencyRates },
   } = state;
   const remoteFeatureFlags = getRemoteFeatureFlags(state);
+  const testRemote = getManifestFlags().remoteFeatureFlags;
+  console.log({ testRemote });
 
   const settingsPageSnapsIds = getSettingsPageSnapsIds(state);
   const snapsMetadata = getSnapsMetadata(state);

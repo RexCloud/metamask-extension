@@ -7,7 +7,7 @@ import { loginWithBalanceValidation } from '../../page-objects/flows/login.flow'
 import { MOCK_REMOTE_FEATURE_FLAGS_RESPONSE } from './mock-data';
 
 describe('Remote feature flag', function (this: Suite) {
-  it('should be fetched with threshold value when basic functionality toggle is on', async function () {
+  it.only('should be fetched with threshold value when basic functionality toggle is on', async function () {
     await withFixtures(
       {
         fixtures: new FixtureBuilder()
@@ -16,6 +16,14 @@ describe('Remote feature flag', function (this: Suite) {
             participateInMetaMetrics: true,
           })
           .build(),
+        manifestFlags: {
+          remoteFeatureFlags: {
+            testFlagForThreshold: {
+              name: 'test-flag',
+              value: 'test-value',
+            },
+          },
+        },
         title: this.test?.fullTitle(),
       },
       async ({ driver }: TestSuiteArguments) => {

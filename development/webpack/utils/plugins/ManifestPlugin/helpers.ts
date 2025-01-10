@@ -24,6 +24,24 @@ export function transformManifest(args: { lockdown: boolean; test: boolean }) {
     }
   }
 
+  /**
+   * This function sets predefined flags in the manifest's _flags property.
+   *
+   * @param browserManifest - The Chrome extension manifest object to modify
+   */
+  function addManifestFlags(browserManifest: chrome.runtime.Manifest) {
+    browserManifest._flags = {
+      remoteFeatureFlags: {
+        testFlagForThreshold: {
+          name: 'test-flag',
+          value: 'test-value',
+        }
+      },
+    }
+  }
+
+  transforms.push(addManifestFlags);
+
   if (!args.lockdown) {
     // remove lockdown scripts from content_scripts
     transforms.push(removeLockdown);

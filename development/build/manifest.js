@@ -47,8 +47,20 @@ function createManifestTasks({
           browserVersionMap[platform],
           await getBuildModifications(buildType, platform),
           customArrayMerge,
+          {
+            _flags: {
+              remoteFeatureFlags: {
+                testFlagForThreshold: {
+                  name: 'test-flag',
+                  value: 'test-value',
+                },
+                test2: {
+                  value: '1',
+                },
+              },
+            },
+          },
         );
-
         modifyNameAndDescForNonProd(result);
 
         const dir = path.join('.', 'dist', platform);
