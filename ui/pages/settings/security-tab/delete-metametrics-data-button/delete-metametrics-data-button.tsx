@@ -22,6 +22,7 @@ import {
   getMetaMetricsDataDeletionTimestamp,
   getMetaMetricsDataDeletionStatus,
   getMetaMetricsId,
+  getParticipateInMetaMetrics,
   getShowDataDeletionErrorModal,
   getShowDeleteMetaMetricsDataModal,
   getLatestMetricsEventTimestamp,
@@ -71,8 +72,8 @@ const DeleteMetaMetricsDataButton: DeleteMetaMetricsDataButtonComponent =
       const latestMetricsEventTimestamp = useSelector(
         getLatestMetricsEventTimestamp,
       );
-
-      let dataDeletionButtonDisabled = Boolean(!metaMetricsId);
+      const isMetaMetricsEnabled = useSelector(getParticipateInMetaMetrics);
+      let dataDeletionButtonDisabled = !isMetaMetricsEnabled;
       if (!dataDeletionButtonDisabled && metaMetricsDataDeletionStatus) {
         dataDeletionButtonDisabled =
           [
