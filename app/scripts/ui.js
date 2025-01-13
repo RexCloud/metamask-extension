@@ -11,7 +11,7 @@ import 'react-devtools';
 import PortStream from 'extension-port-stream';
 import browser from 'webextension-polyfill';
 
-import StreamProvider from 'web3-stream-provider';
+import { StreamProvider } from '@metamask/providers';
 import log from 'loglevel';
 // TODO: Remove restricted import
 // eslint-disable-next-line import/no-restricted-paths
@@ -30,6 +30,7 @@ import ExtensionPlatform from './platforms/extension';
 import { setupMultiplex } from './lib/stream-utils';
 import { getEnvironmentType, getPlatform } from './lib/util';
 import metaRPCClientFactory from './lib/metaRPCClientFactory';
+import { LEGACY_PROVIDER } from './constants/stream';
 
 const PHISHING_WARNING_PAGE_TIMEOUT = 1 * 1000; // 1 Second
 const PHISHING_WARNING_SW_STORAGE_KEY = 'phishing-warning-sw-registered';
@@ -355,11 +356,14 @@ function connectToAccountManager(connectionStream) {
  * @param {PortDuplexStream} connectionStream - PortStream instance establishing a background connection
  */
 function setupWeb3Connection(connectionStream) {
-  const providerStream = new StreamProvider();
-  providerStream.pipe(connectionStream).pipe(providerStream);
+  const providerStream = new StreamProvider(connectionStream, {
+    jsonRpcStreamName: LEGACY_PROVIDER,
+  });
+  providerStream.initialize().then(() => {
+    global.ethereumProvider = providerStream;
+  });
   connectionStream.on('error', console.error.bind(console));
   providerStream.on('error', console.error.bind(console));
-  global.ethereumProvider = providerStream;
 }
 
 /**

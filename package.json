@@ -306,7 +306,7 @@
     "@metamask/eth-ledger-bridge-keyring": "^5.0.1",
     "@metamask/eth-sig-util": "^7.0.1",
     "@metamask/eth-snap-keyring": "^7.0.0",
-    "@metamask/eth-token-tracker": "^9.0.0",
+    "@metamask/eth-token-tracker": "^10.0.1",
     "@metamask/eth-trezor-keyring": "^6.0.0",
     "@metamask/etherscan-link": "^3.0.0",
     "@metamask/gas-fee-controller": "^22.0.1",
@@ -439,7 +439,6 @@
     "unicode-confusables": "^0.1.1",
     "uri-js": "^4.4.1",
     "uuid": "^8.3.2",
-    "web3-stream-provider": "^5.0.0",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
