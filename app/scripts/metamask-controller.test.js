@@ -952,7 +952,7 @@ describe('MetaMaskController', () => {
             deviceName,
             hdPath,
           );
-          expect(result).toBe('OneKey via Trezor');
+          expect(result).toBe('OneKey');
         });
       });
 

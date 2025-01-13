@@ -4890,7 +4890,7 @@ export default class MetamaskController extends EventEmitter {
     let keyringName = null;
     switch (deviceName) {
       case HardwareDeviceNames.trezor:
-      case HardwareDeviceNames.oneKeyViaTrezor:
+      case HardwareDeviceNames.oneKey:
         keyringName = keyringOverrides?.trezor?.type || TrezorKeyring.type;
         break;
       case HardwareDeviceNames.ledger:
@@ -4999,7 +4999,7 @@ export default class MetamaskController extends EventEmitter {
       const { minorVersion } = keyring.bridge;
       // Specific case for OneKey devices, see `ONE_KEY_VIA_TREZOR_MINOR_VERSION` for further details.
       if (minorVersion && minorVersion === ONE_KEY_VIA_TREZOR_MINOR_VERSION) {
-        return HardwareDeviceNames.oneKeyViaTrezor;
+        return HardwareDeviceNames.oneKey;
       }
     }
 
